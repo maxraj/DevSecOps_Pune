@@ -1,0 +1,21 @@
+@reallyslow
+Feature: Check for cross site scripting (XSS) vulnerability using arachni against gruyere
+Background:
+  Given "arachni" is installed
+  And the following profile:
+  | name              | value                             |
+  | url               | http://172.17.0.2:8008/login      |
+
+Scenario: Do a xss check on the path
+  When I launch an "arachni" attack with:
+  """
+  arachni --checks=xss_path --output-verbose --scope-page-limit=1 <url>
+  """
+  Then the output should contain "0 issues were detected"
+  
+Scenario: Do a xss check on the event
+  When I launch an "arachni" attack with:
+  """
+  arachni --checks=xss_event --output-verbose --scope-page-limit=1 <url>
+  """
+  Then the output should contain "0 issues were detected"
