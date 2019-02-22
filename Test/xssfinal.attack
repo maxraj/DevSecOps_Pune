@@ -3,8 +3,8 @@ Feature: Check for cross site scripting (XSS) vulnerability using arachni agains
 Background:
   Given "arachni" is installed
   And the following profile:
-  | name              | value                             |
-  | url               | http://172.17.0.2:8008/login      |
+  | name              | environment_variable_name         |
+  | url               | TARGET_HOSTNAME                   |
 
 Scenario: Do a xss check on the path
   When I launch an "arachni" attack with:
